@@ -1,0 +1,3 @@
+#foreach ($key in $properties.keySet())
+$key=${properties.get($key)}
+#end
