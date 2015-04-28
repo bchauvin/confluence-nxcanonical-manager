@@ -28,10 +28,37 @@ public class VelocityContext {
         this.pageManager = pageManager;
     }
 
+    public boolean canPrintNxCanonical(VelocitySitemeshPage page) {
+        if (page == null) {
+            return false;
+        }
+
+        if (page.getProperty("page.canonical") != null
+            &&
+            (page.getProperty("page.canonical").contains("/display/")
+            || page.getProperty("page.canonical").contains("/pages/"))
+            ) {
+            return true;
+        }
+
+        return false;
+    }
+
     public String printNxCanonical(VelocitySitemeshPage page, Object body) {
+        if (page == null || body == null) {
+            return null;
+        }
+
         @SuppressWarnings("unchecked")
         Map<String, String> meshProperties = page.getProperties();
+        if (meshProperties == null) {
+            return null;
+        }
+
         Map<String, String> metadata = getNxCanonical(meshProperties, body);
+        if (metadata == null) {
+            return null;
+        }
 
         // Don't do anything if in latest space
         if (metadata.get("isLatestSpace") != null
@@ -71,7 +98,8 @@ public class VelocityContext {
 
         // Try to get the page in the current space
         if (pageManager.getPage(shortSpaceName, pageTitle) != null) {
-            // Spaces in title have to be replaced with + signs only after page has been checked
+            // Spaces in title have to be replaced with + signs only after page
+            // has been checked
             // Otherwise it will not be found
             metadata.put(metadataKey, baseUrl + shortSpaceName + "/"
                     + pageTitle.replaceAll(" ", "+"));
