@@ -98,8 +98,8 @@ public class VelocityContext {
 
         // Try to get the page in the current space
         if (pageManager.getPage(shortSpaceName, pageTitle) != null) {
-            // Spaces in title have to be replaced with + signs only after page
-            // has been checked
+            // Spaces in title have to be replaced with + signs
+            // only after page has been checked
             // Otherwise it will not be found
             metadata.put(metadataKey, baseUrl + shortSpaceName + "/"
                     + pageTitle.replaceAll(" ", "+"));
