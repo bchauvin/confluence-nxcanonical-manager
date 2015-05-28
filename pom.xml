@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.nuxeo.confluence</groupId>
   <artifactId>nxcanonical-manager</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0</version>
 
   <organization>
     <name>Nuxeo</name>
